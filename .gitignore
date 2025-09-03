@@ -1,0 +1,12 @@
+# Temporary
+toDo/
+
+# Folders
+node_modules/
+report/
+.vscode/
+
+# Env Files
+.env
+.env.dev
+.env.prod
