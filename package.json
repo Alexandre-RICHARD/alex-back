@@ -10,7 +10,7 @@
     "=== Dev ===": "",
     "start": "tsx watch ./src/index.ts",
     "=== Lint & Tests ===": "",
-    "global-test": "pnpm check-types && pnpm lint-fix && unit-test-once",
+    "global-test": "pnpm check-types && pnpm lint-fix && pnpm unit-test-once",
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
     "check-types": "tsc --noEmit",
@@ -18,10 +18,10 @@
     "unit-test-watch": "vitest watch --mode dev",
     "unit-test-report": "vitest run --mode dev --reporter=html --coverage.enabled=true && vite preview --outDir report --open",
     "=== Build & Production ===": "",
-    "start-prod": "tsx ./index.ts",
+    "start-prod": "tsx ./src/index.ts",
     "=== Packages ===": "",
-    "install-dependencies": "pnpm i --reporter=append-only",
-    "update-dependencies": "pnpm update --reporter=append-only"
+    "install-dependencies": "pnpm i",
+    "update-dependencies": "pnpm update"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -29,7 +29,7 @@
     "express": "^5.1.0"
   },
   "devDependencies": {
-    "@stylistic/eslint-plugin": "^2.13.0",
+    "@stylistic/eslint-plugin": "^5.3.1",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
     "@types/node": "^24.3.0",
@@ -40,7 +40,7 @@
     "eslint": "8.57.1",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^18.0.0",
-    "eslint-config-prettier": "^9.1.2",
+    "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-promise": "^7.2.1",
@@ -51,6 +51,7 @@
     "tsx": "^4.20.5",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.42.0",
+    "vite": "^7.1.4",
     "vitest": "^3.2.4"
   }
 }

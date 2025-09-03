@@ -32,6 +32,8 @@
   },
   "include": [
     "src",
+    "vite.config.ts",
+    "**/*.d.ts",
   ],
   "exclude": [
     "build",

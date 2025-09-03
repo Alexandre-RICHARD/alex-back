@@ -2,9 +2,9 @@
 toDo/
 
 # Folders
+.vscode/
 node_modules/
 report/
-.vscode/
 
 # Env Files
 .env
