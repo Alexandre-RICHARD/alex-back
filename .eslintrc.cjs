@@ -12,7 +12,8 @@ module.exports = {
     "vite.config.ts",
     "vitest.config.ts",
     "vitest.setup.ts",
-    // Temporary
+    "alex-specs",
+    // TODO
     "toDo"
   ],
   extends: [
@@ -72,7 +73,15 @@ module.exports = {
     "import/no-unused-modules": ["error", { "missingExports ": true, "unusedExports": true }],
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
-    "import/extensions": "off",
+    "import/extensions": ["error", "always"],
+    "no-restricted-imports": ["error", {
+      patterns: [
+        {
+          group: ["**/alex-specs/**"],
+          message: "Should import only from @specs",
+        },
+      ],
+    }],
 
     // Typescript
     "@typescript-eslint/consistent-type-imports": "error",

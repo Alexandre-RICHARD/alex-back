@@ -29,6 +29,14 @@
     "types": [
       "node"
     ],
+    "paths": {
+      "@apiSpecs": [
+        "alex-specs/specs.ts"
+      ],
+      "@specs/*": [
+        "alex-specs/specs/*"
+      ],
+    },
   },
   "include": [
     "src",
@@ -38,6 +46,6 @@
   "exclude": [
     "build",
     "node_modules",
-    "report",
+    "report"
   ],
 }

@@ -1,8 +1,10 @@
+import apiSpecs from "@apiSpecs";
+import { zodiosApp } from "@zodios/express";
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 
-import { routerV1 } from "./api/v1/routerV1.ts";
+import { globalRouter } from "./api/globalRouter.ts";
 
 dotenv.config();
 
@@ -12,10 +14,11 @@ const corsOptions = {
 	credentials: true,
 };
 
-const app = express();
+const app = zodiosApp(apiSpecs);
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use("/v1", routerV1);
+
+app.use(globalRouter);
 
 app.use((req, res): void => {
 	res.status(404).json({
@@ -28,6 +31,7 @@ const port = process.env.LOCAL_PORT;
 
 function start(): void {
 	app.listen(port, () => {
+		// TODO
 		// eslint-disable-next-line no-console
 		console.log(
 			`API démarré sur \x1b[36mhttp://${adress}:\x1b[1m${port}\x1b[0m`,
