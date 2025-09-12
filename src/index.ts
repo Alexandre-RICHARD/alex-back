@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import express from "express";
 
 import { globalRouter } from "./api/globalRouter.ts";
+import { testDb } from "./database/testDb.ts";
 
 dotenv.config();
 
@@ -29,7 +30,8 @@ app.use((req, res): void => {
 const adress = process.env.LOCAL_ADDRESS;
 const port = process.env.LOCAL_PORT;
 
-function start(): void {
+async function start() {
+	await testDb();
 	app.listen(port, () => {
 		// TODO
 		// eslint-disable-next-line no-console
@@ -39,4 +41,6 @@ function start(): void {
 	});
 }
 
-start();
+start().catch((error) => {
+	throw new Error(error ? JSON.stringify(error) : "Default error message");
+});
