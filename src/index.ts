@@ -1,13 +1,12 @@
+import "dotenv/config.js";
+
 import apiSpecs from "@apiSpecs";
 import { zodiosApp } from "@zodios/express";
 import cors from "cors";
-import dotenv from "dotenv";
 import express from "express";
 
 import { globalRouter } from "./api/globalRouter.ts";
-import { testDb } from "./database/testDb.ts";
-
-dotenv.config();
+import { sequelize } from "./database/sequelizeConnector.ts";
 
 const corsOptions = {
 	origin: process.env.CORS_ORIGIN.split("|"),
@@ -31,7 +30,7 @@ const adress = process.env.LOCAL_ADDRESS;
 const port = process.env.LOCAL_PORT;
 
 async function start() {
-	await testDb();
+	await sequelize.authenticate();
 	app.listen(port, () => {
 		// TODO
 		// eslint-disable-next-line no-console
