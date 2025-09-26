@@ -1,11 +1,9 @@
 import "dotenv/config.js";
 
-import apiSpecs from "@apiSpecs";
-import { zodiosApp } from "@zodios/express";
 import cors from "cors";
 import express from "express";
 
-import { globalRouter } from "./globalRouter.ts";
+import { testRouter } from "./secondRouter.ts";
 import { sequelize } from "./sequelize.ts";
 
 const corsOptions = {
@@ -14,11 +12,11 @@ const corsOptions = {
 	credentials: true,
 };
 
-const app = zodiosApp(apiSpecs);
+const app = express();
 app.use(cors(corsOptions));
 app.use(express.json());
 
-app.use(globalRouter);
+app.use(testRouter);
 
 app.use((req, res): void => {
 	res.status(404).json({

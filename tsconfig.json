@@ -36,6 +36,9 @@
       "@specs/*": [
         "alex-specs/project/*"
       ],
+      "@specss/*": [
+        "alex-specs/src/*"
+      ],
     },
   },
   "include": [
