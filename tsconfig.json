@@ -34,7 +34,7 @@
         "alex-specs/specs.ts"
       ],
       "@specs/*": [
-        "alex-specs/specs/*"
+        "alex-specs/project/*"
       ],
     },
   },
@@ -46,6 +46,6 @@
   "exclude": [
     "build",
     "node_modules",
-    "report"
+    "report",
   ],
 }

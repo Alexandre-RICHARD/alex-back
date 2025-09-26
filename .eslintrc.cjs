@@ -13,7 +13,7 @@ module.exports = {
     "vitest.config.ts",
     "vitest.setup.ts",
     "alex-specs",
-    // TODO
+    // TODO Gérer le dossier todo
     "toDo"
   ],
   extends: [

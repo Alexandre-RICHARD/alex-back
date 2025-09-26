@@ -5,8 +5,8 @@ import { zodiosApp } from "@zodios/express";
 import cors from "cors";
 import express from "express";
 
-import { globalRouter } from "./api/globalRouter.ts";
-import { sequelize } from "./database/sequelizeConnector.ts";
+import { globalRouter } from "./globalRouter.ts";
+import { sequelize } from "./sequelize.ts";
 
 const corsOptions = {
 	origin: process.env.CORS_ORIGIN.split("|"),
@@ -32,7 +32,7 @@ const port = process.env.LOCAL_PORT;
 async function start() {
 	await sequelize.authenticate();
 	app.listen(port, () => {
-		// TODO
+		// TODO S'arranger pour supprimer ce console.log ou en tout cas l'avertissement
 		// eslint-disable-next-line no-console
 		console.log(
 			`API démarré sur \x1b[36mhttp://${adress}:\x1b[1m${port}\x1b[0m`,
