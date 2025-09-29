@@ -1,9 +1,7 @@
-import type { NextFunction } from "express";
+import type { RequestHandler } from "express";
 
 export const asyncRequestHandler =
-	<Args extends unknown[]>(
-		fn: (...args: [...Args, NextFunction]) => Promise<unknown>,
-	) =>
-	(...args: [...Args, NextFunction]) => {
-		Promise.resolve(fn(...args)).catch(args[args.length - 1] as NextFunction);
+	(fn: RequestHandler): RequestHandler =>
+	(req, res, next) => {
+		Promise.resolve(fn(req, res, next)).catch(next);
 	};
