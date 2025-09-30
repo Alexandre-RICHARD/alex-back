@@ -1,12 +1,10 @@
-import { testSpecs } from "@specs/testing/specs/test.specs.ts";
-import { zodiosRouter } from "@zodios/express";
+import { Router } from "express";
 
-import { asyncRequestHandler } from "../../common/asyncRequestHandler.ts";
 import { testController } from "./controller/default.controller.ts";
 
-const testRouter = zodiosRouter(testSpecs);
+const testRouter = Router();
 
-testRouter.get("/test/all", asyncRequestHandler(testController.getAllTests));
-testRouter.get("/test/unique", asyncRequestHandler(testController.getOneTest));
+testRouter.get("/test/all", testController.getAllTests);
+testRouter.get("/test/unique", testController.getOneTest);
 
 export { testRouter };

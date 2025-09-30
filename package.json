@@ -24,14 +24,11 @@
     "update-dependencies": "pnpm update"
   },
   "dependencies": {
-    "@zodios/core": "^10.9.6",
-    "@zodios/express": "^10.6.1",
     "cors": "^2.8.5",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
     "mariadb": "^3.4.5",
-    "sequelize": "6.37.7",
-    "zod": "^4.1.5"
+    "sequelize": "6.37.7"
   },
   "devDependencies": {
     "@stylistic/eslint-plugin": "^5.3.1",

@@ -1,9 +1,18 @@
-import type { NextFunction } from "express";
+import type { NextFunction, Request, RequestHandler, Response } from "express";
 
-export const asyncRequestHandler =
-	<Args extends unknown[]>(
-		fn: (...args: [...Args, NextFunction]) => Promise<unknown>,
-	) =>
-	(...args: [...Args, NextFunction]) => {
-		Promise.resolve(fn(...args)).catch(args[args.length - 1] as NextFunction);
+export function asyncHandler<
+	ReqParams = Record<string, string>,
+	ResBody = unknown,
+	ReqBody = unknown,
+	ReqQuery = Record<string, string>,
+>(
+	fn: (
+		req: Request<ReqParams, ResBody, ReqBody, ReqQuery>,
+		res: Response<ResBody>,
+		next: NextFunction,
+	) => Promise<unknown>,
+): RequestHandler<ReqParams, ResBody, ReqBody, ReqQuery> {
+	return (req, res, next) => {
+		Promise.resolve(fn(req, res, next)).catch(next);
 	};
+}

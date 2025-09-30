@@ -30,11 +30,8 @@
       "node"
     ],
     "paths": {
-      "@apiSpecs": [
-        "alex-specs/specs.ts"
-      ],
       "@specs/*": [
-        "alex-specs/project/*"
+        "alex-specs/src/*"
       ],
     },
   },
