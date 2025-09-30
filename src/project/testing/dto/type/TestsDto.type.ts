@@ -1,4 +1,3 @@
-import type { testSpecs } from "@specs/testing/specs/test.specs.ts";
-import type { ZodiosResponseByAlias } from "@zodios/core";
+import type { TestDto } from "./TestDto.type.ts";
 
-export type TestsDto = ZodiosResponseByAlias<typeof testSpecs, "getTests">;
+export type TestsDto = TestDto[];

@@ -1,12 +1,15 @@
-import { testSpecs } from "@specs/testing/specs/test.specs.ts";
-import { zodiosRouter } from "@zodios/express";
+import type { TestEndpointRegistry } from "@specs/endpoint/testEndpointRegistry.type.ts";
+import { Router as ExpressRouter } from "express";
 
-import { asyncRequestHandler } from "../../common/asyncRequestHandler.ts";
+import { createTypedExpressRouter } from "../../common/createTypedExpressRouter.ts";
 import { testController } from "./controller/default.controller.ts";
 
-const testRouter = zodiosRouter(testSpecs);
+const expressRouter = ExpressRouter();
 
-testRouter.get("/test/all", asyncRequestHandler(testController.getAllTests));
-testRouter.get("/test/unique", asyncRequestHandler(testController.getOneTest));
+const typedRouter =
+	createTypedExpressRouter<TestEndpointRegistry>(expressRouter);
 
-export { testRouter };
+typedRouter.GET("/test/get/:uuid", testController.testGet);
+typedRouter.POST("/test/unique/:id", testController.fakePostTest);
+
+export const testRouter = expressRouter;

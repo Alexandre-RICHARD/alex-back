@@ -1,30 +1,26 @@
 import "dotenv/config.js";
 
-import apiSpecs from "@apiSpecs";
-import { zodiosApp } from "@zodios/express";
 import cors from "cors";
 import express from "express";
 
 import { globalRouter } from "./globalRouter.ts";
+import { notFound } from "./middleware/notFound.ts";
 import { sequelize } from "./sequelize.ts";
 
 const corsOptions = {
 	origin: process.env.CORS_ORIGIN.split("|"),
 	methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+	allowedHeaders: ["Content-Type", "Authorization"],
 	credentials: true,
 };
 
-const app = zodiosApp(apiSpecs);
-app.use(cors(corsOptions));
+const app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cors(corsOptions));
 
 app.use(globalRouter);
-
-app.use((req, res): void => {
-	res.status(404).json({
-		error: `Cette route (${req.originalUrl}) n'est pas gérée par le serveur.`,
-	});
-});
+app.use(notFound);
 
 const adress = process.env.LOCAL_ADDRESS;
 const port = process.env.LOCAL_PORT;

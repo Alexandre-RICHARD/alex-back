@@ -1,4 +1,4 @@
 [submodule "alex-specs"]
 	path = alex-specs
-	url = git@github.com:Alexandre-RICHARD/alex-specs.git
+	url = https://github.com/Alexandre-RICHARD/alex-specs.git
 	branch = main
