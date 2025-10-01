@@ -10,6 +10,7 @@ import { sequelize } from "./sequelize.ts";
 const corsOptions = {
 	origin: process.env.CORS_ORIGIN.split("|"),
 	methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+	allowedHeaders: ["Content-Type", "Authorization"],
 	credentials: true,
 };
 

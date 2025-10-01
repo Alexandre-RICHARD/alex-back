@@ -5,6 +5,6 @@ import { testController } from "./controller/default.controller.ts";
 const testRouter = Router();
 
 testRouter.get("/test/all", testController.getAllTests);
-testRouter.get("/test/unique", testController.getOneTest);
+testRouter.post("/test/unique/:id", testController.getOneTest);
 
 export { testRouter };
