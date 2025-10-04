@@ -9,12 +9,7 @@ const expressRouter = Router();
 const typedRouter =
 	createTypedExpressRouter<TestEndpointRegistry>(expressRouter);
 
-//  Success
 typedRouter.GET("/test/get", testController.testGet);
-typedRouter.POST("/test/unique/:id", testController.getOneTest);
-
-// Failure
-typedRouter.POST("/test/get", testController.testGet);
-typedRouter.GET("/test/unique/:id", testController.getOneTest);
+typedRouter.POST("/test/unique/:id", testController.fakePostTest);
 
 export const testRouter = expressRouter;
