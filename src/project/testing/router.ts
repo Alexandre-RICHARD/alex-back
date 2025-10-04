@@ -1,10 +1,20 @@
+import type { TestEndpointRegistry } from "@specs/endpoint/testEndpointRegistry.type.ts";
 import { Router } from "express";
 
+import { createTypedExpressRouter } from "../../common/createTypedExpressRouter.ts";
 import { testController } from "./controller/default.controller.ts";
 
-const testRouter = Router();
+const expressRouter = Router();
 
-testRouter.get("/test/all", testController.getAllTests);
-testRouter.post("/test/unique/:id", testController.getOneTest);
+const typedRouter =
+	createTypedExpressRouter<TestEndpointRegistry>(expressRouter);
 
-export { testRouter };
+//  Success
+typedRouter.GET("/test/get", testController.testGet);
+typedRouter.POST("/test/unique/:id", testController.getOneTest);
+
+// Failure
+typedRouter.POST("/test/get", testController.testGet);
+typedRouter.GET("/test/unique/:id", testController.getOneTest);
+
+export const testRouter = expressRouter;

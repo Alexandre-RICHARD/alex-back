@@ -32,4 +32,7 @@ export const testController = {
 
 		res.status(200).json(["Jean-Pierre", "Michel"]);
 	}),
+	testGet: asyncHandler(async (_req, res) => {
+		res.status(200).json({ answer: "Success ? Genre vraiment" });
+	}),
 };
