@@ -27,6 +27,7 @@ const port = process.env.LOCAL_PORT;
 
 async function start() {
 	await sequelize.authenticate();
+
 	app.listen(port, () => {
 		// TODO S'arranger pour supprimer ce console.log ou en tout cas l'avertissement
 		// eslint-disable-next-line no-console

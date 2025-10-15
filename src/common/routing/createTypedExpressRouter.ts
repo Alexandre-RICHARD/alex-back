@@ -8,17 +8,19 @@ type EndpointUrlByMethod<
 > = Extract<EndpointRegistry, { request: { method: Http } }>["request"]["url"];
 
 type TypedRouterShape<Registry extends EndpointModel> = {
-	[M in HttpMethodEnum]: <U extends EndpointUrlByMethod<Registry, M>>(
-		path: U,
-		handler: HandlerFor<EndpointByMethodAndUrl<Registry, M, U>>,
+	[Method in HttpMethodEnum]: <
+		Url extends EndpointUrlByMethod<Registry, Method>,
+	>(
+		path: Url,
+		handler: HandlerFor<EndpointByMethodAndUrl<Registry, Method, Url>>,
 	) => void;
 };
 
 type EndpointByMethodAndUrl<
 	Registry extends EndpointModel,
-	M extends HttpMethodEnum,
-	U extends EndpointUrlByMethod<Registry, M>,
-> = Extract<Registry, { request: { method: M; url: U } }>;
+	Method extends HttpMethodEnum,
+	Url extends EndpointUrlByMethod<Registry, Method>,
+> = Extract<Registry, { request: { method: Method; url: Url } }>;
 
 type HandlerFor<E extends EndpointModel> = RequestHandler<
 	E["request"]["pathParams"],
@@ -55,46 +57,48 @@ export function createTypedExpressRouter<
 	};
 
 	return {
-		GET<U extends EndpointUrlByMethod<EndpointRegistry, HttpMethodEnum.GET>>(
-			path: U,
+		GET<Url extends EndpointUrlByMethod<EndpointRegistry, HttpMethodEnum.GET>>(
+			path: Url,
 			handler: HandlerFor<
-				EndpointByMethodAndUrl<EndpointRegistry, HttpMethodEnum.GET, U>
+				EndpointByMethodAndUrl<EndpointRegistry, HttpMethodEnum.GET, Url>
 			>,
 		) {
 			register(HttpMethodEnum.GET, path, handler);
 		},
-		POST<U extends EndpointUrlByMethod<EndpointRegistry, HttpMethodEnum.POST>>(
-			path: U,
+		POST<
+			Url extends EndpointUrlByMethod<EndpointRegistry, HttpMethodEnum.POST>,
+		>(
+			path: Url,
 			handler: HandlerFor<
-				EndpointByMethodAndUrl<EndpointRegistry, HttpMethodEnum.POST, U>
+				EndpointByMethodAndUrl<EndpointRegistry, HttpMethodEnum.POST, Url>
 			>,
 		) {
 			register(HttpMethodEnum.POST, path, handler);
 		},
-		PUT<U extends EndpointUrlByMethod<EndpointRegistry, HttpMethodEnum.PUT>>(
-			path: U,
+		PUT<Url extends EndpointUrlByMethod<EndpointRegistry, HttpMethodEnum.PUT>>(
+			path: Url,
 			handler: HandlerFor<
-				EndpointByMethodAndUrl<EndpointRegistry, HttpMethodEnum.PUT, U>
+				EndpointByMethodAndUrl<EndpointRegistry, HttpMethodEnum.PUT, Url>
 			>,
 		) {
 			register(HttpMethodEnum.PUT, path, handler);
 		},
 		PATCH<
-			U extends EndpointUrlByMethod<EndpointRegistry, HttpMethodEnum.PATCH>,
+			Url extends EndpointUrlByMethod<EndpointRegistry, HttpMethodEnum.PATCH>,
 		>(
-			path: U,
+			path: Url,
 			handler: HandlerFor<
-				EndpointByMethodAndUrl<EndpointRegistry, HttpMethodEnum.PATCH, U>
+				EndpointByMethodAndUrl<EndpointRegistry, HttpMethodEnum.PATCH, Url>
 			>,
 		) {
 			register(HttpMethodEnum.PATCH, path, handler);
 		},
 		DELETE<
-			U extends EndpointUrlByMethod<EndpointRegistry, HttpMethodEnum.DELETE>,
+			Url extends EndpointUrlByMethod<EndpointRegistry, HttpMethodEnum.DELETE>,
 		>(
-			path: U,
+			path: Url,
 			handler: HandlerFor<
-				EndpointByMethodAndUrl<EndpointRegistry, HttpMethodEnum.DELETE, U>
+				EndpointByMethodAndUrl<EndpointRegistry, HttpMethodEnum.DELETE, Url>
 			>,
 		) {
 			register(HttpMethodEnum.DELETE, path, handler);

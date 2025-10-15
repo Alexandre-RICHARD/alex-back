@@ -6,7 +6,7 @@ import {
 	Model,
 } from "sequelize";
 
-import { sequelize } from "../../../../sequelize.ts";
+import { sequelize } from "../../../sequelize.ts";
 
 export class Test extends Model<
 	InferAttributes<Test>,

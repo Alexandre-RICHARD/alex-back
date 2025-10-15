@@ -21,7 +21,8 @@
     "start-prod": "tsx ./src/index.ts",
     "=== Packages ===": "",
     "install-dependencies": "pnpm i",
-    "update-dependencies": "pnpm update"
+    "update-dependencies": "pnpm update",
+    "update-submodules": "git submodule update --init --recursive"
   },
   "dependencies": {
     "cors": "^2.8.5",

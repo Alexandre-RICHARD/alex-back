@@ -13,7 +13,6 @@ export const sequelize = new Sequelize(database, username, password, {
 		charset: "utf8mb4",
 		collate: "utf8mb4_unicode_520_ci",
 	},
-	sync: { force: true },
 	pool: {
 		max: 10,
 		idle: 30000,

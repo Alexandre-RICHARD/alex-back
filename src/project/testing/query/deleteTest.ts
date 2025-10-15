@@ -7,24 +7,20 @@ type Args = {
 	id: number;
 };
 
-export async function getOneTest({ id }: Args): Promise<Test | null> {
+export async function deleteTest({ id }: Args): Promise<Test | null> {
 	const sql = `
-      SELECT t.*
-      FROM tests t
-			WHERE t.id = :id
-			LIMIT 1;
+      DELETE FROM tests t
+			WHERE id = :id;
     `;
 
 	try {
-		const result = await sequelize.query<Test>(sql, {
-			type: QueryTypes.SELECT,
+		return await sequelize.query<Test>(sql, {
+			type: QueryTypes.DELETE,
 			plain: true,
 			mapToModel: true,
 			model: Test,
 			replacements: { id },
 		});
-
-		return result;
 	} catch (error) {
 		throw new Error(error as string);
 	}
