@@ -5,6 +5,7 @@ import express from "express";
 
 import { globalRouter } from "./globalRouter.ts";
 import { notFound } from "./middleware/notFound.ts";
+import { unhandledMethod } from "./middleware/unhandledMethod.ts";
 import { sequelize } from "./sequelize.ts";
 
 const corsOptions = {
@@ -16,9 +17,11 @@ const corsOptions = {
 
 const app = express();
 app.use(express.json());
+app.disable("etag");
 app.use(express.urlencoded({ extended: false }));
 app.use(cors(corsOptions));
 
+app.use(unhandledMethod);
 app.use(globalRouter);
 app.use(notFound);
 
