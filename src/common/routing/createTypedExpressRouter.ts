@@ -2,6 +2,8 @@ import type { EndpointModel } from "@specs/specUtils/endpointModel.type.ts";
 import { HttpMethodEnum } from "@specs/specUtils/httpMethod.enum.ts";
 import type { RequestHandler, Router as ExpressRouter } from "express";
 
+import type { CustomEndpointHandler } from "./customEndpointHandler.type.ts";
+
 type EndpointUrlByMethod<
 	EndpointRegistry extends EndpointModel,
 	Http extends HttpMethodEnum,
@@ -12,7 +14,9 @@ type TypedRouterShape<Registry extends EndpointModel> = {
 		Url extends EndpointUrlByMethod<Registry, Method>,
 	>(
 		path: Url,
-		handler: HandlerFor<EndpointByMethodAndUrl<Registry, Method, Url>>,
+		handler: CustomEndpointHandler<
+			EndpointByMethodAndUrl<Registry, Method, Url>
+		>,
 	) => void;
 };
 
@@ -21,13 +25,6 @@ type EndpointByMethodAndUrl<
 	Method extends HttpMethodEnum,
 	Url extends EndpointUrlByMethod<Registry, Method>,
 > = Extract<Registry, { request: { method: Method; url: Url } }>;
-
-type HandlerFor<E extends EndpointModel> = RequestHandler<
-	E["request"]["pathParams"],
-	E["response"],
-	E["request"]["body"],
-	E["request"]["queryParams"]
->;
 
 export function createTypedExpressRouter<
 	EndpointRegistry extends EndpointModel,
@@ -59,7 +56,7 @@ export function createTypedExpressRouter<
 	return {
 		GET<Url extends EndpointUrlByMethod<EndpointRegistry, HttpMethodEnum.GET>>(
 			path: Url,
-			handler: HandlerFor<
+			handler: CustomEndpointHandler<
 				EndpointByMethodAndUrl<EndpointRegistry, HttpMethodEnum.GET, Url>
 			>,
 		) {
@@ -69,7 +66,7 @@ export function createTypedExpressRouter<
 			Url extends EndpointUrlByMethod<EndpointRegistry, HttpMethodEnum.POST>,
 		>(
 			path: Url,
-			handler: HandlerFor<
+			handler: CustomEndpointHandler<
 				EndpointByMethodAndUrl<EndpointRegistry, HttpMethodEnum.POST, Url>
 			>,
 		) {
@@ -77,7 +74,7 @@ export function createTypedExpressRouter<
 		},
 		PUT<Url extends EndpointUrlByMethod<EndpointRegistry, HttpMethodEnum.PUT>>(
 			path: Url,
-			handler: HandlerFor<
+			handler: CustomEndpointHandler<
 				EndpointByMethodAndUrl<EndpointRegistry, HttpMethodEnum.PUT, Url>
 			>,
 		) {
@@ -87,7 +84,7 @@ export function createTypedExpressRouter<
 			Url extends EndpointUrlByMethod<EndpointRegistry, HttpMethodEnum.PATCH>,
 		>(
 			path: Url,
-			handler: HandlerFor<
+			handler: CustomEndpointHandler<
 				EndpointByMethodAndUrl<EndpointRegistry, HttpMethodEnum.PATCH, Url>
 			>,
 		) {
@@ -97,7 +94,7 @@ export function createTypedExpressRouter<
 			Url extends EndpointUrlByMethod<EndpointRegistry, HttpMethodEnum.DELETE>,
 		>(
 			path: Url,
-			handler: HandlerFor<
+			handler: CustomEndpointHandler<
 				EndpointByMethodAndUrl<EndpointRegistry, HttpMethodEnum.DELETE, Url>
 			>,
 		) {

@@ -1,48 +1,36 @@
 import type { EndpointModel } from "@specs/specUtils/endpointModel.type.ts";
-import type { ResponseStatusMap } from "@specs/specUtils/responseStatusMap.type.ts";
-import type {
-	NextFunction,
-	Request,
-	RequestHandler,
-	Response as ExpressResponse,
-} from "express";
+import type { NextFunction, Response as ExpressResponse } from "express";
+
+import type { CustomEndpointHandler } from "./customEndpointHandler.type.ts";
+import type { CustomEndpointRequest } from "./customEndpointRequest.type.ts";
+import type { ResponseMap } from "./responseMap.type.ts";
 
 type JsonFor<ResponseBody> = { json: (body: ResponseBody) => ExpressResponse };
 
 type StatusReturn<
-	EndpointReponse extends ResponseStatusMap,
-	Status extends keyof EndpointReponse & number,
-> = Omit<ExpressResponse, "json"> & JsonFor<EndpointReponse[Status]>;
+	Map extends Record<number, unknown>,
+	Status extends keyof Map & number,
+> = Omit<ExpressResponse, "json"> & JsonFor<Map[Status]>;
 
-type TypedResponse<EndpointReponse extends ResponseStatusMap> = Omit<
+type TypedResponse<Map extends Record<number, unknown>> = Omit<
 	ExpressResponse,
 	"status" | "json"
 > & {
-	status<Status extends keyof EndpointReponse & number>(
+	status<Status extends keyof Map & number>(
 		code: Status,
-	): StatusReturn<EndpointReponse, Status>;
+	): StatusReturn<Map, Status>;
 };
 
 export function asyncRequestHandler<Endpoint extends EndpointModel>(
 	fn: (
-		req: Request<
-			Endpoint["request"]["pathParams"],
-			Endpoint["response"],
-			Endpoint["request"]["body"],
-			Endpoint["request"]["queryParams"]
-		>,
-		res: TypedResponse<Endpoint["response"]>,
+		req: CustomEndpointRequest<Endpoint>,
+		res: TypedResponse<ResponseMap<Endpoint>>,
 		next: NextFunction,
 	) => Promise<unknown>,
-): RequestHandler<
-	Endpoint["request"]["pathParams"],
-	Endpoint["response"],
-	Endpoint["request"]["body"],
-	Endpoint["request"]["queryParams"]
-> {
+): CustomEndpointHandler<Endpoint> {
 	return (req, res, next) => {
 		Promise.resolve(
-			fn(req, res as unknown as TypedResponse<Endpoint["response"]>, next),
+			fn(req, res as unknown as TypedResponse<ResponseMap<Endpoint>>, next),
 		).catch(next);
 	};
 }

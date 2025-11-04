@@ -3,7 +3,8 @@ import type { DeleteTest } from "@specs/project/test/endpoint/deleteTest.endpoin
 import type { GetAllTest } from "@specs/project/test/endpoint/getAllTest.endpoint.ts";
 import type { GetOneTest } from "@specs/project/test/endpoint/getOneTest.endpoint.ts";
 import type { UpdateTest } from "@specs/project/test/endpoint/updateTest.endpoint.ts";
-import { HttpStatutCodeEnum } from "@specs/specUtils/httpStatutCode.enum.ts";
+import { HttpStatutCodeErrorEnum } from "@specs/specUtils/httpStatutCodeError.enum.ts";
+import { HttpStatutCodeSuccessEnum } from "@specs/specUtils/httpStatutCodeSuccess.enum.ts";
 
 import { assertBoolean } from "../../../common/asserts/assertBoolean.ts";
 import { assertNumber } from "../../../common/asserts/assertNumber.ts";
@@ -26,11 +27,11 @@ export const testController = {
 		const result = await getOneTest({ id: parsedId });
 
 		if (!result) {
-			return response.status(HttpStatutCodeEnum.NOT_FOUND).json(null);
+			return response.status(HttpStatutCodeErrorEnum.NOT_FOUND).json(null);
 		}
 
 		return response
-			.status(HttpStatutCodeEnum.SUCCESS)
+			.status(HttpStatutCodeSuccessEnum.SUCCESS)
 			.json(toTestDtoMapper(result));
 	}),
 
@@ -38,11 +39,11 @@ export const testController = {
 		const result = await getAllTests();
 
 		if (!result) {
-			return response.status(HttpStatutCodeEnum.NO_CONTENT).json(null);
+			return response.status(HttpStatutCodeSuccessEnum.NO_CONTENT).json([]);
 		}
 
 		return response
-			.status(HttpStatutCodeEnum.SUCCESS)
+			.status(HttpStatutCodeSuccessEnum.SUCCESS)
 			.json(toTestsDtoMapper(result));
 	}),
 
@@ -53,11 +54,11 @@ export const testController = {
 		const result = await createTest({ name });
 
 		if (!result) {
-			return response.status(HttpStatutCodeEnum.BAD_REQUEST).json(null);
+			return response.status(HttpStatutCodeErrorEnum.BAD_REQUEST).json(null);
 		}
 
 		return response
-			.status(HttpStatutCodeEnum.CREATED)
+			.status(HttpStatutCodeSuccessEnum.CREATED)
 			.json(toTestDtoMapper(result));
 	}),
 
@@ -76,11 +77,11 @@ export const testController = {
 		});
 
 		if (!result) {
-			return response.status(HttpStatutCodeEnum.NOT_FOUND).json(null);
+			return response.status(HttpStatutCodeErrorEnum.NOT_FOUND).json(null);
 		}
 
 		return response
-			.status(HttpStatutCodeEnum.SUCCESS)
+			.status(HttpStatutCodeSuccessEnum.SUCCESS)
 			.json(toTestDtoMapper(result));
 	}),
 
@@ -90,6 +91,6 @@ export const testController = {
 		assertNumber(parsedId, "testController::getOne> id");
 
 		await deleteTest({ id: parsedId });
-		return response.status(HttpStatutCodeEnum.SUCCESS).json(null);
+		return response.status(HttpStatutCodeSuccessEnum.SUCCESS).json(null);
 	}),
 };
