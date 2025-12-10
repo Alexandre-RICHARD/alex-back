@@ -8,7 +8,9 @@ module.exports = {
   ignorePatterns: [
     "node_modules",
     "report",
+    "build",
     ".eslintrc.cjs",
+    "esbuild.config.mjs",
     "vite.config.ts",
     "vitest.config.ts",
     "vitest.setup.ts",

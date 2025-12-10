@@ -22,7 +22,6 @@
     "strict": true,
     "target": "es2022",
     "useDefineForClassFields": true,
-    "verbatimModuleSyntax": true,
     "lib": [
       "ES2022"
     ],

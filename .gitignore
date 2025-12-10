@@ -5,6 +5,7 @@ toDo/
 .vscode/
 node_modules/
 report/
+build/
 
 # Env Files
 .env
