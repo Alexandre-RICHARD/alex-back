@@ -24,4 +24,6 @@ RUN pnpm install --prod --frozen-lockfile
 
 COPY --from=builder /app/build ./build
 
+COPY ./src/sql/migrations ./migrations
+
 CMD ["node", "build/build.server.js"]

@@ -13,7 +13,7 @@
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
     "check-types": "tsc --noEmit",
-    "unit-test-once": "vitest run  --mode dev",
+    "unit-test-once": "vitest run --mode dev",
     "unit-test-watch": "vitest watch --mode dev",
     "unit-test-report": "vitest run --mode dev --reporter=html --coverage.enabled=true && vite preview --outDir report --open",
     "validate-all": "pnpm check-types && pnpm lint-fix && pnpm unit-test-once",
