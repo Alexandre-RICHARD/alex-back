@@ -28,6 +28,6 @@ jobs:
 
       - name: Build & push
         run: |
-          IMAGE=ghcr.io/alexandre-richard/reunion-backend:${GITHUB_REF_NAME}
+          IMAGE=ghcr.io/alexandre-richard/reunification-backend:${GITHUB_REF_NAME}
           docker build -t $IMAGE .
           docker push $IMAGE
