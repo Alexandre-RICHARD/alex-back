@@ -1,7 +1,7 @@
 import { QueryTypes } from "sequelize";
 
 import { sequelize } from "../../../sequelize.ts";
-import { Test } from "../models/models.ts";
+import { Test } from "../models/Test.ts";
 
 type Args = {
 	id: number;

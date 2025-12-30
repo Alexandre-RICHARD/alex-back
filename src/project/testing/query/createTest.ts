@@ -2,7 +2,7 @@ import { QueryTypes } from "sequelize";
 
 import { dateNow } from "../../../common/date/dateNow.ts";
 import { sequelize } from "../../../sequelize.ts";
-import { Test } from "../models/models.ts";
+import { Test } from "../models/Test.ts";
 
 type Args = {
 	name: string;

@@ -1,7 +1,7 @@
 import { QueryTypes } from "sequelize";
 
 import { sequelize } from "../../../sequelize.ts";
-import { Test } from "../models/models.ts";
+import { Test } from "../models/Test.ts";
 
 export async function getAllTests(): Promise<Test[]> {
 	const sql = `

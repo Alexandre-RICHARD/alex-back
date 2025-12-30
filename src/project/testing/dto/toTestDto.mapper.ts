@@ -1,6 +1,6 @@
 import type { TestDto } from "@specs/project/test/dto/test.dto.ts";
 
-import type { Test } from "../models/models.ts";
+import type { Test } from "../models/Test.ts";
 
 export function toTestDtoMapper(entity: Test): TestDto {
 	return {
