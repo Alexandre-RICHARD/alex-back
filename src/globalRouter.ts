@@ -1,9 +1,11 @@
 import { Router } from "express";
 
-import { testRouter } from "./project/testing/router.ts";
+import { errorLogRouter } from "./project/errorLog/errorLogRouter.ts";
+import { testRouter } from "./project/testing/testRouter.ts";
 
 const globalRouter = Router();
 
 globalRouter.use(testRouter);
+globalRouter.use(errorLogRouter);
 
 export { globalRouter };
