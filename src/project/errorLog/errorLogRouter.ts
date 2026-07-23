@@ -9,6 +9,6 @@ const expressRouter = ExpressRouter();
 const typedRouter =
 	createTypedExpressRouter<ErrorLogEndpointRegistry>(expressRouter);
 
-typedRouter.POST("/error", errorLogController.create);
+typedRouter.POST("/error/error", errorLogController.create);
 
 export const errorLogRouter = expressRouter;

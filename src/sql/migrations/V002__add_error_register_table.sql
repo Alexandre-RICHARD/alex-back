@@ -1,5 +1,5 @@
 CREATE TABLE error_log (
-    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
 
     error_type VARCHAR(100) NOT NULL,
     message TEXT NOT NULL,
@@ -9,4 +9,6 @@ CREATE TABLE error_log (
 
     INDEX idx_error_type (error_type),
     INDEX idx_created_at (created_at)
-);
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_unicode_520_ci;
