@@ -31,8 +31,10 @@ async function start() {
 	await sequelize.authenticate();
 
 	app.listen(port, () => {
-		// TODO S'arranger pour supprimer ce console.log ou en tout cas l'avertissement
-		// eslint-disable-next-line no-console
+		/*
+			TODO S'arranger pour supprimer ce console.log ou en tout cas l'avertissement
+			eslint-disable-next-line no-console
+		*/
 		console.log(`API démarré sur le port \x1b[36m\x1b[1m${port}\x1b[0m`);
 	});
 }
