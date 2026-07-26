@@ -30,7 +30,8 @@
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
     "mariadb": "^3.4.5",
-    "sequelize": "6.37.7"
+    "sequelize": "6.37.7",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@stylistic/eslint-plugin": "^5.3.1",
