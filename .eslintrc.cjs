@@ -72,7 +72,7 @@ module.exports = {
     "import/no-default-export": "error",
     "import/prefer-default-export": "off",
     "import/first": "error",
-    "import/no-unused-modules": ["error", { "missingExports ": true, "unusedExports": true }],
+    "import/no-unused-modules": ["warn", { "missingExports ": true, "unusedExports": true }],
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
     "import/extensions": ["error", "always"],

@@ -1,7 +1,7 @@
 import { Router } from "express";
 
-import { errorLogRouter } from "./project/errorLog/errorLogRouter.ts";
-import { testRouter } from "./project/testing/testRouter.ts";
+import { errorLogRouter } from "./project/errorLog/router.ts";
+import { testRouter } from "./project/testing/Router.ts";
 
 const globalRouter = Router();
 
