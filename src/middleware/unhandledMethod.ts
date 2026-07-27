@@ -10,6 +10,7 @@ export function unhandledMethod(
 		res.status(HttpStatutCodeErrorEnum.METHOD_NOT_ALLOWED).json({
 			error: `Cette méthode (${req.method}) n'est pas gérée par le serveur.`,
 		});
+		return;
 	}
 
 	next();

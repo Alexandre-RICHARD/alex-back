@@ -4,6 +4,7 @@ import cors from "cors";
 import express from "express";
 
 import { globalRouter } from "./globalRouter.ts";
+import { globalErrorHandler } from "./middleware/globalErrorHandler.ts";
 import { notFound } from "./middleware/notFound.ts";
 import { unhandledMethod } from "./middleware/unhandledMethod.ts";
 import { sequelize } from "./sequelize.ts";
@@ -24,6 +25,7 @@ app.use(cors(corsOptions));
 app.use(unhandledMethod);
 app.use(globalRouter);
 app.use(notFound);
+app.use(globalErrorHandler);
 
 const port = process.env.LOCAL_PORT;
 
@@ -38,5 +40,6 @@ async function start() {
 }
 
 start().catch((error) => {
-	throw new Error(error ? JSON.stringify(error) : "Default error message");
+	console.error("Échec du démarrage du serveur :", error);
+	process.exit(1);
 });

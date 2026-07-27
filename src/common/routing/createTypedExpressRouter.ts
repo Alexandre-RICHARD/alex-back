@@ -17,6 +17,7 @@ type TypedRouterShape<Registry extends EndpointModel> = {
 		handler: CustomEndpointHandler<
 			EndpointByMethodAndUrl<Registry, Method, Url>
 		>,
+		validator?: RequestHandler,
 	) => void;
 };
 
@@ -29,22 +30,31 @@ type EndpointByMethodAndUrl<
 export function createTypedExpressRouter<
 	EndpointRegistry extends EndpointModel,
 >(expressRouter: ExpressRouter): TypedRouterShape<EndpointRegistry> {
-	const register = (method: HttpMethodEnum, path: string, handler: unknown) => {
+	const register = (
+		method: HttpMethodEnum,
+		path: string,
+		handler: unknown,
+		validator?: RequestHandler,
+	) => {
+		const handlers = validator
+			? [validator, handler as RequestHandler]
+			: [handler as RequestHandler];
+
 		switch (method) {
 			case HttpMethodEnum.GET:
-				expressRouter.get(path, handler as RequestHandler);
+				expressRouter.get(path, ...handlers);
 				break;
 			case HttpMethodEnum.POST:
-				expressRouter.post(path, handler as RequestHandler);
+				expressRouter.post(path, ...handlers);
 				break;
 			case HttpMethodEnum.PUT:
-				expressRouter.put(path, handler as RequestHandler);
+				expressRouter.put(path, ...handlers);
 				break;
 			case HttpMethodEnum.PATCH:
-				expressRouter.patch(path, handler as RequestHandler);
+				expressRouter.patch(path, ...handlers);
 				break;
 			case HttpMethodEnum.DELETE:
-				expressRouter.delete(path, handler as RequestHandler);
+				expressRouter.delete(path, ...handlers);
 				break;
 			default:
 				throw new Error(
@@ -59,8 +69,9 @@ export function createTypedExpressRouter<
 			handler: CustomEndpointHandler<
 				EndpointByMethodAndUrl<EndpointRegistry, HttpMethodEnum.GET, Url>
 			>,
+			validator?: RequestHandler,
 		) {
-			register(HttpMethodEnum.GET, path, handler);
+			register(HttpMethodEnum.GET, path, handler, validator);
 		},
 		POST<
 			Url extends EndpointUrlByMethod<EndpointRegistry, HttpMethodEnum.POST>,
@@ -69,16 +80,18 @@ export function createTypedExpressRouter<
 			handler: CustomEndpointHandler<
 				EndpointByMethodAndUrl<EndpointRegistry, HttpMethodEnum.POST, Url>
 			>,
+			validator?: RequestHandler,
 		) {
-			register(HttpMethodEnum.POST, path, handler);
+			register(HttpMethodEnum.POST, path, handler, validator);
 		},
 		PUT<Url extends EndpointUrlByMethod<EndpointRegistry, HttpMethodEnum.PUT>>(
 			path: Url,
 			handler: CustomEndpointHandler<
 				EndpointByMethodAndUrl<EndpointRegistry, HttpMethodEnum.PUT, Url>
 			>,
+			validator?: RequestHandler,
 		) {
-			register(HttpMethodEnum.PUT, path, handler);
+			register(HttpMethodEnum.PUT, path, handler, validator);
 		},
 		PATCH<
 			Url extends EndpointUrlByMethod<EndpointRegistry, HttpMethodEnum.PATCH>,
@@ -87,8 +100,9 @@ export function createTypedExpressRouter<
 			handler: CustomEndpointHandler<
 				EndpointByMethodAndUrl<EndpointRegistry, HttpMethodEnum.PATCH, Url>
 			>,
+			validator?: RequestHandler,
 		) {
-			register(HttpMethodEnum.PATCH, path, handler);
+			register(HttpMethodEnum.PATCH, path, handler, validator);
 		},
 		DELETE<
 			Url extends EndpointUrlByMethod<EndpointRegistry, HttpMethodEnum.DELETE>,
@@ -97,8 +111,9 @@ export function createTypedExpressRouter<
 			handler: CustomEndpointHandler<
 				EndpointByMethodAndUrl<EndpointRegistry, HttpMethodEnum.DELETE, Url>
 			>,
+			validator?: RequestHandler,
 		) {
-			register(HttpMethodEnum.DELETE, path, handler);
+			register(HttpMethodEnum.DELETE, path, handler, validator);
 		},
 	};
 }

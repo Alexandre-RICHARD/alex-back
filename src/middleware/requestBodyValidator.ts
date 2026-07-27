@@ -2,6 +2,8 @@ import { HttpStatutCodeErrorEnum } from "@specs/specUtils/httpStatutCodeError.en
 import type { NextFunction, Request, Response } from "express";
 import type { ZodType } from "zod";
 
+import { BadRequestError } from "../error/BadRequestError.ts";
+
 export function requestBodyValidator<T>(schema: ZodType<T>) {
 	return (request: Request, response: Response, next: NextFunction) => {
 		const result = schema.safeParse(request.body);
@@ -12,7 +14,7 @@ export function requestBodyValidator<T>(schema: ZodType<T>) {
 				issues: result.error.issues,
 			});
 
-			return;
+			throw new BadRequestError("Parsing of query params failed", result.error);
 		}
 
 		request.body = result.data;
