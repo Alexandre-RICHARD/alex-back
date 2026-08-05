@@ -5,7 +5,7 @@ const username = process.env.DB_USER_NAME;
 const password = process.env.DB_USER_PASSWORD;
 
 export const sequelize = new Sequelize(database, username, password, {
-	dialect: "mariadb",
+	dialect: process.env.DB_DRIVER,
 	host: process.env.DB_HOST,
 	port: parseInt(process.env.DB_PORT, 10),
 	define: {
