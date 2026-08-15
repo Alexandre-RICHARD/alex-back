@@ -14,3 +14,4 @@ build/
 
 # Flyway
 flyway.toml
+src/sql/databaseInit.sql
