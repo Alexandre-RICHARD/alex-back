@@ -1,0 +1,10 @@
+databaseType = "MariaDb"
+
+[environments.local]
+baselineOnMigrate = true
+
+[flyway]
+locations = [ "filesystem:./src/sql/migrations" ]
+mixed = true
+outOfOrder = false
+validateMigrationNaming = true

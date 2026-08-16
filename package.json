@@ -9,6 +9,7 @@
   "scripts": {
     "=== Dev ===": "",
     "start": "tsx watch ./src/index.ts",
+    "init-db": "bash ./scripts/init_db.sh",
     "migrate": "bash ./scripts/flyway_local.sh",
     "=== Lint & Tests ===": "",
     "lint": "eslint .",

@@ -12,6 +12,4 @@ build/
 .env.dev
 .env.prod
 
-# Flyway
-flyway.toml
 src/sql/databaseInit.sql
