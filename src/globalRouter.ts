@@ -1,8 +1,8 @@
 import { Router } from "express";
 
-import { errorLogRouter } from "./project/errorLog/router.ts";
-import { gameDeathCounterRouter } from "./project/gameDeathCounter/router.ts";
-import { testRouter } from "./project/testing/router.ts";
+import { errorLogRouter } from "./projects/errorLog/router.ts";
+import { gameDeathCounterRouter } from "./projects/gameDeathCounter/router.ts";
+import { testRouter } from "./projects/testing/router.ts";
 
 const globalRouter = Router();
 

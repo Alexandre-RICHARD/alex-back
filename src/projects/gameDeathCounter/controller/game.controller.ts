@@ -1,4 +1,4 @@
-import type { CreateGame } from "@specs/project/gameDeathCounter/endpoint/games/createGame/createGame.endpoint.ts";
+import type { CreateGame } from "@specs/projects/gameDeathCounter/endpoint/games/createGame/createGame.endpoint.ts";
 import { HttpStatutCodeErrorEnum } from "@specs/specUtils/httpStatutCodeError.enum.ts";
 import { HttpStatutCodeSuccessEnum } from "@specs/specUtils/httpStatutCodeSuccess.enum.ts";
 

@@ -1,4 +1,4 @@
-import { createErrorLog } from "../project/errorLog/query/createErrorLog.ts";
+import { createErrorLog } from "../projects/errorLog/query/createErrorLog.ts";
 import { ErrorTypeEnum } from "./errorType.enum.ts";
 
 export async function handleBaseError(error: unknown): Promise<void> {

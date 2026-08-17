@@ -1,4 +1,4 @@
-import type { TestDto } from "@specs/project/test/dto/test.dto.ts";
+import type { TestDto } from "@specs/projects/test/dto/test.dto.ts";
 
 import type { Test } from "../models/Test.ts";
 

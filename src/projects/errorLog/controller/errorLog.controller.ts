@@ -1,4 +1,4 @@
-import type { CreateErrorLog } from "@specs/project/errorLog/endpoint/createError.endpoint.ts";
+import type { CreateErrorLog } from "@specs/projects/errorLog/endpoint/createError.endpoint.ts";
 import { HttpStatutCodeErrorEnum } from "@specs/specUtils/httpStatutCodeError.enum.ts";
 import { HttpStatutCodeSuccessEnum } from "@specs/specUtils/httpStatutCodeSuccess.enum.ts";
 

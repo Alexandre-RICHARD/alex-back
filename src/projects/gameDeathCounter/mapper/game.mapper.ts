@@ -1,4 +1,4 @@
-import type { GameSummaryDto } from "@specs/project/gameDeathCounter/dto/game/gameSummary.dto.ts";
+import type { GameSummaryDto } from "@specs/projects/gameDeathCounter/dto/game/gameSummary.dto.ts";
 
 import { mapDateToString } from "../../../common/date/mapDateToString.ts";
 import { mapNullableDateToStringOrNull } from "../../../common/date/mapNullableDateToStringOrNull.ts";

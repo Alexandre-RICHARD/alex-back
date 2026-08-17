@@ -1,8 +1,8 @@
-import type { CreateTest } from "@specs/project/test/endpoint/createTest.endpoint.ts";
-import type { DeleteTest } from "@specs/project/test/endpoint/deleteTest.endpoint.ts";
-import type { GetAllTest } from "@specs/project/test/endpoint/getAllTest.endpoint.ts";
-import type { GetOneTest } from "@specs/project/test/endpoint/getOneTest.endpoint.ts";
-import type { UpdateTest } from "@specs/project/test/endpoint/updateTest.endpoint.ts";
+import type { CreateTest } from "@specs/projects/test/endpoint/createTest.endpoint.ts";
+import type { DeleteTest } from "@specs/projects/test/endpoint/deleteTest.endpoint.ts";
+import type { GetAllTest } from "@specs/projects/test/endpoint/getAllTest.endpoint.ts";
+import type { GetOneTest } from "@specs/projects/test/endpoint/getOneTest.endpoint.ts";
+import type { UpdateTest } from "@specs/projects/test/endpoint/updateTest.endpoint.ts";
 import { HttpStatutCodeErrorEnum } from "@specs/specUtils/httpStatutCodeError.enum.ts";
 import { HttpStatutCodeSuccessEnum } from "@specs/specUtils/httpStatutCodeSuccess.enum.ts";
 
